@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autores cadastrados</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+<h2 style="text-align: center;">Autores cadastrados</h2>
+
+<table id="livrosTable">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Primeiro nome</th>
+            <th>Nome do meio</th>
+            <th>Último nome</th>
+            <th>Nacionalidade</th>
+            <th>Ano de Nascimento</th>
+            <th>Ano de Falecimento</th>
+            <!-- Adicione mais colunas conforme necessário -->
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Os dados da tabela serão preenchidos dinamicamente pelo JavaScript -->
+    </tbody>
+</table>
+
+<script>
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = String(date.getFullYear()).slice();
+        return `${day}.${month}.${year}`;
+    }
+
+    // Função para carregar os dados da rota /livros
+    function carregarLivros() {
+        fetch('/dados_autores')
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.querySelector('#livrosTable tbody');
+            tableBody.innerHTML = ''; // Limpa o conteúdo atual da tabela
+            data.forEach(autor => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${autor.id_autor}</td>
+                    <td>${autor.pnome}</td>
+                    <td>${autor.mnome}</td>
+                    <td>${autor.unome}</td>
+                    <td>${autor.pais}</td>
+                    <td>${formatDate(autor.ano_nac)}</td>
+                    <td>${formatDate(autor.ano_morte)}</td>
+                    <!-- Adicione mais colunas conforme necessário -->
+                `;
+                tableBody.appendChild(row);
+            });
+        })
+        .catch(error => {
+            console.error('Erro ao carregar dados:', error);
+        });
+    }
+
+    // Chama a função para carregar os dados quando a página é carregada
+    document.addEventListener('DOMContentLoaded', carregarLivros);
+</script>
+
+</body>
+</html>
