@@ -3,25 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style_datapages.css">
     <title>Autores cadastrados</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid #dddddd;
-            text-align: center;
-            padding: 8px;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
 </head>
 <body>
 
-<h2 style="text-align: center;">Autores cadastrados</h2>
+<h2>Autores cadastrados</h2>
 
 <table id="livrosTable">
     <thead>
@@ -50,6 +37,15 @@
         return `${day}.${month}.${year}`;
     }
 
+    function ValidarMorte(data_morte) { 
+        if (data_morte === null) { 
+            return "Ainda Vivo"
+        }
+        else { 
+            return formatDate(data_morte)
+        }
+    }
+
     // Função para carregar os dados da rota /livros
     function carregarLivros() {
         fetch('/dados_autores')
@@ -66,7 +62,7 @@
                     <td>${autor.unome}</td>
                     <td>${autor.pais}</td>
                     <td>${formatDate(autor.ano_nac)}</td>
-                    <td>${formatDate(autor.ano_morte)}</td>
+                    <td>${ValidarMorte(autor.ano_morte)}</td>
                     <!-- Adicione mais colunas conforme necessário -->
                 `;
                 tableBody.appendChild(row);
