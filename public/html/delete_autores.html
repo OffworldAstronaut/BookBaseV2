@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style_cadastro.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style_home.css">
+    <title>Deleção de autores</title>
+</head>
+
+<body>
+    <ul>
+        <li><a href="./index.html">Home</a></li>
+        <li class="dropdown">
+            <a href="javascript:void(0)" class="dropbtn">Cadastrar dados</a>
+            <div class="dropdown-content">
+                <a href="./cadastro_livros.html">Livros</a>
+                <a href="./cadastro_autores.html">Autores</a>
+            </div>
+        </li>
+    </ul>
+
+    <h1>Cadastrar Autor</h1>
+    <form action="/dados_autores" method="post" id="autorForm">
+        <label for="pnome_autor">Primeiro nome</label><br>
+        <input type="text" id="pnome_autor" name="pnome_autor"><br>
+        <label for="mnome_autor">Sobrenome</label><br>
+        <input type="text" id="mnome_autor" name="mnome_autor"><br>
+        <label for="unome_autor">Último nome</label>
+        <input type="text" name="unome_autor" id="unome_autor">
+
+        <label for="pais_autor">País</label>
+        <input type="text" name="pais_autor" id="pais_autor">
+        <label for="ano_nac_autor">Ano de Nascimento</label>
+        <input type="date" name="ano_nac_autor" id="ano_nac_autor">
+        <label for="ano_morte_autor">Data da Morte</label>
+        <input type="date" name="ano_morte_autor" id="ano_morte_autor">
+
+        <label for="ainda_vivo">Ainda Vivo</label>
+        <input type="checkbox" id="ainda_vivo" name="ainda_vivo" onchange="toggleMorteDate()">
+        
+        <button type="submit">Enviar</button>
+    </form>
+
+    <script>
+        function toggleMorteDate() {
+            var aindaVivoCheckbox = document.getElementById('ainda_vivo');
+            var dataMorteInput = document.getElementById('ano_morte_autor');
+
+            if (aindaVivoCheckbox.checked) {
+                dataMorteInput.value = null;
+                dataMorteInput.disabled = true;
+            } else {
+                dataMorteInput.disabled = false;
+            }
+        }
+
+        // Ensure initial state is set correctly
+        toggleMorteDate();
+    </script>
+</body>
+
+</html>

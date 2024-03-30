@@ -63,6 +63,31 @@ app.post('/dados_livros', function (req, res) {
 }
 );
 
+// Atualiza um livro no banco de dados por meio do ID especificado - PUT
+app.put('/livros/:id_livro', function (req, res) {
+    const { titulo_livro, genero_livro, lingua_livro, origem_livro, isbn_livro, data_pub_livro } = req.body;
+    connection.query('UPDATE livro SET titulo=?, genero=?, lingua=?, origem=?, isbn=?, data_pub=? WHERE id_livro=?', [titulo_livro, genero_livro, lingua_livro, origem_livro, isbn_livro, data_pub_livro, req.params.id_livro], function (err, results) {
+        if (err) {
+            console.log(err)
+            res.status(500).send('Erro ao atualizar livro.');
+        } else {
+            res.send('Livro atualizado com sucesso.');
+        }
+    });
+});
+
+// Deleta um livro do banco de dados por meio do ID especificado - DELETE
+app.delete('/livros/:id_livro', function (req, res) {
+    connection.query('DELETE FROM livro WHERE id_livro=?', [req.params.id_livro], function (err, results) {
+        if (err) {
+            console.log(err)
+            res.status(500).send('Erro ao excluir livro.');
+        } else {
+            res.send('Livro excluído com sucesso.');
+        }
+    });
+});
+
 
 // AUTORES
 
@@ -108,6 +133,31 @@ app.post('/dados_autores', function (req, res) {
         }
     })
 })
+
+// Atualiza um autor no banco de dados por meio do ID especificado - PUT
+app.put('/dados_autores/:id_autor', function (req, res) {
+    const { pnome_autor, mnome_autor, unome_autor, pais_autor, ano_nac_autor, ano_morte_autor } = req.body;
+    connection.query('UPDATE autor SET pnome=?, mnome=?, unome=?, pais=?, ano_nac=?, ano_morte=? WHERE id_autor=?', [pnome_autor, mnome_autor, unome_autor, pais_autor, ano_nac_autor, ano_morte_autor, req.params.id_autor], function (err, results) {
+        if (err) {
+            console.log(err)
+            res.status(500).send('Erro ao atualizar autor.');
+        } else {
+            res.send('Autor atualizado com sucesso.');
+        }
+    });
+});
+
+// Deleta um autor do banco de dados por meio do ID especificado - DELETE
+app.delete('/dados_autores/:id_autor', function (req, res) {
+    connection.query('DELETE FROM autor WHERE id_autor=?', [req.params.id_autor], function (err, results) {
+        if (err) {
+            console.log(err)
+            res.status(500).send('Erro ao excluir autor.');
+        } else {
+            res.send('Autor excluído com sucesso.');
+        }
+    });
+});
 
 // Executa o servidor HTTP na porta padrão (80)
 app.listen(80)
