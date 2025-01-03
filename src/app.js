@@ -160,4 +160,4 @@ app.delete('/dados_autores/:id_autor', function (req, res) {
 });
 
 // Executa o servidor HTTP na porta padrão (80)
-app.listen(80)
+app.listen(3000)
