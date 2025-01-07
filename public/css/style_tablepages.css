@@ -1,0 +1,32 @@
+.title {
+    border: 2px solid rgb(58, 96, 138);
+    border-radius: 10px;
+    background-color: rgb(58, 96, 138);
+    padding: 20px;
+    margin: 10px;
+
+    display: grid;
+    justify-content: center;
+
+    text-align: center;
+    color: white;
+
+    font-size: larger;
+    
+}
+
+.container { 
+    display: flexbox;
+    justify-content: center;
+
+}
+
+body { 
+    background-color: rgb(240, 243, 255);
+
+    font-family: Arial, Helvetica, sans-serif;
+    max-width: 80%;
+
+    margin-left: auto;
+    margin-right: auto;
+}

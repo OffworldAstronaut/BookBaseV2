@@ -16,28 +16,46 @@
         <div class="buttons_menu">
     
             <div>
-                <button>
+                <button onclick="navigate('/books')">
                     View stored books
                 </button>
             </div>
-            
+    
             <div>
-                <button>
+                <button onclick="navigate('/authors')">
                     View authors
                 </button>
             </div>
             
             <div>
-                <button>
-                    Register, delete or alter a book
+                <button onclick="navigate('/books')">
+                    Register a book
                 </button>
             </div>
+
             <div>
-                <button>
-                    Register, delete or alter an author
+                <button onclick="navigate('/books')">
+                    Register an author
+                </button>
+            </div>
+
+            <div>
+                <button onclick="navigate('/books')">
+                    Delete or edit a book
+                </button>
+            </div>
+            
+            <div>
+                <button onclick="navigate('/books')">
+                    Delete or edit an author
                 </button>
             </div>
         </div>
+        <script>
+            function navigate(route) {
+                window.location.href = route;
+            }
+        </script>
     </div>
 </body>
 
